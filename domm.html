@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Data Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .resume {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .controls {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .output {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+        .edit-form {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Data Manipulation</h1>
+        
+        <div class="controls">
+            <h2>Read Resume Data</h2>
+            <button onclick="readWithInnerHTML()">Read with innerHTML</button>
+            <button onclick="readWithInnerText()">Read with innerText</button>
+            <button onclick="readWithTextContent()">Read with textContent</button>
+            <button onclick="readWithGetAttribute()">Read with getAttribute</button>
+            <button onclick="readWithQuerySelector()">Read with querySelector</button>
+            <div class="output" id="read-output">Output will appear here...</div>
+        </div>
+        
+        <div class="resume" id="resume">
+            <h2>Professional Resume</h2>
+            <div class="section">
+                <h3 id="name-section">Name: <span id="name" data-value="John Doe">John Doe</span></h3>
+                <p id="title" data-value="Web Developer">Web Developer</p>
+                <p id="email">Email: <a href="mailto:john@example.com">john@example.com</a></p>
+            </div>
+            
+            <div class="section">
+                <h3>Skills</h3>
+                <ul id="skills">
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                    <li>React</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3>Experience</h3>
+                <div id="experience">
+                    <h4>Senior Web Developer</h4>
+                    <p>XYZ Company, 2020-Present</p>
+                    <p>Led development of multiple web applications using modern frameworks.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>Education</h3>
+                <div id="education">
+                    <p><strong>Bachelor of Technology in Computer Science</strong></p>
+                    <p>University of hyderabad, 2020-2024</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="edit-form">
+            <h2>Update Resume Data</h2>
+            
+            <div class="section">
+                <h3>Update Name</h3>
+                <input type="text" id="new-name" placeholder="Enter new name">
+                <button onclick="updateWithInnerHTML('name')">Update with innerHTML</button>
+                <button onclick="updateWithInnerText('name')">Update with innerText</button>
+            </div>
+            
+            <div class="section">
+                <h3>Update Title</h3>
+                <input type="text" id="new-title" placeholder="Enter new title">
+                <button onclick="updateWithInnerHTML('title')">Update with innerHTML</button>
+                <button onclick="updateWithInnerText('title')">Update with innerText</button>
+            </div>
+            
+            <div class="section">
+                <h3>Update Experience</h3>
+                <textarea id="new-experience" rows="4" placeholder="Enter new experience (HTML supported for innerHTML)"></textarea>
+                <button onclick="updateWithInnerHTML('experience')">Update with innerHTML</button>
+                <button onclick="updateWithInnerText('experience')">Update with innerText</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Read methods
+        function readWithInnerHTML() {
+            const nameElement = document.getElementById('name');
+            const titleElement = document.getElementById('title');
+            const skillsElement = document.getElementById('skills');
+            
+            document.getElementById('read-output').innerHTML = 
+                `<strong>innerHTML method:</strong><br>` +
+                `Name: ${nameElement.innerHTML}<br>` +
+                `Title: ${titleElement.innerHTML}<br>` +
+                `Skills: ${skillsElement.innerHTML}`;
+        }
+        
+        function readWithInnerText() {
+            const nameElement = document.getElementById('name');
+            const titleElement = document.getElementById('title');
+            const skillsElement = document.getElementById('skills');
+            
+            document.getElementById('read-output').innerHTML = 
+                `<strong>innerText method:</strong><br>` +
+                `Name: ${nameElement.innerText}<br>` +
+                `Title: ${titleElement.innerText}<br>` +
+                `Skills: ${skillsElement.innerText}`;
+        }
+        
+        function readWithTextContent() {
+            const nameElement = document.getElementById('name');
+            const titleElement = document.getElementById('title');
+            const skillsElement = document.getElementById('skills');
+            
+            document.getElementById('read-output').innerHTML = 
+                `<strong>textContent method:</strong><br>` +
+                `Name: ${nameElement.textContent}<br>` +
+                `Title: ${titleElement.textContent}<br>` +
+                `Skills: ${skillsElement.textContent}`;
+        }
+        
+        function readWithGetAttribute() {
+            const nameElement = document.getElementById('name');
+            const titleElement = document.getElementById('title');
+            
+            document.getElementById('read-output').innerHTML = 
+                `<strong>getAttribute method:</strong><br>` +
+                `Name data-value: ${nameElement.getAttribute('data-value')}<br>` +
+                `Title data-value: ${titleElement.getAttribute('data-value')}`;
+        }
+        
+        function readWithQuerySelector() {
+            const nameSection = document.querySelector('#name-section').textContent;
+            const skills = document.querySelectorAll('#skills li');
+            let skillsText = "";
+            
+            skills.forEach(skill => {
+                skillsText += skill.textContent + ", ";
+            });
+            
+            document.getElementById('read-output').innerHTML = 
+                `<strong>querySelector method:</strong><br>` +
+                `Name Section: ${nameSection}<br>` +
+                `Skills: ${skillsText.slice(0, -2)}`;
+        }
+        
+        // Update methods
+        function updateWithInnerHTML(elementId) {
+            let newValue = '';
+            
+            if (elementId === 'name') {
+                newValue = document.getElementById('new-name').value;
+                if (newValue) {
+                    document.getElementById('name').innerHTML = newValue;
+                }
+            } else if (elementId === 'title') {
+                newValue = document.getElementById('new-title').value;
+                if (newValue) {
+                    document.getElementById('title').innerHTML = newValue;
+                }
+            } else if (elementId === 'experience') {
+                newValue = document.getElementById('new-experience').value;
+                if (newValue) {
+                    document.getElementById('experience').innerHTML = newValue;
+                }
+            }
+        }
+        
+        function updateWithInnerText(elementId) {
+            let newValue = '';
+            
+            if (elementId === 'name') {
+                newValue = document.getElementById('new-name').value;
+                if (newValue) {
+                    document.getElementById('name').innerText = newValue;
+                }
+            } else if (elementId === 'title') {
+                newValue = document.getElementById('new-title').value;
+                if (newValue) {
+                    document.getElementById('title').innerText = newValue;
+                }
+            } else if (elementId === 'experience') {
+                newValue = document.getElementById('new-experience').value;
+                if (newValue) {
+                    document.getElementById('experience').innerText = newValue;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
